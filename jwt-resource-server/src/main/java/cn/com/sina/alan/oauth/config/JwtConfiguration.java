@@ -9,15 +9,12 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 /**
- * Created by on 01.02.16.
- *
- * @author David Steiman
+ * Created by on 2017.03.08.
  */
 @Configuration
 public class JwtConfiguration {
     @Autowired
     JwtAccessTokenConverter jwtAccessTokenConverter;
-
 
     @Bean
     @Qualifier("tokenStore")
@@ -27,19 +24,19 @@ public class JwtConfiguration {
         return new JwtTokenStore(jwtAccessTokenConverter);
     }
 
-//    @Bean
-//    protected JwtAccessTokenConverter jwtTokenEnhancer() {
-//        JwtAccessTokenConverter converter =  new JwtAccessTokenConverter();
-//        Resource resource = new ClassPathResource("public.cert");
-//        String publicKey = null;
-//        try {
-//            publicKey = new String(FileCopyUtils.copyToByteArray(resource.getInputStream()));
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//        converter.setVerifierKey(publicKey);
-//        return converter;
-//    }
+    //    @Bean
+    //    protected JwtAccessTokenConverter jwtTokenEnhancer() {
+    //        JwtAccessTokenConverter converter =  new JwtAccessTokenConverter();
+    //        Resource resource = new ClassPathResource("public.cert");
+    //        String publicKey = null;
+    //        try {
+    //            publicKey = new String(FileCopyUtils.copyToByteArray(resource.getInputStream()));
+    //        } catch (IOException e) {
+    //            throw new RuntimeException(e);
+    //        }
+    //        converter.setVerifierKey(publicKey);
+    //        return converter;
+    //    }
 
     @Bean
     protected JwtAccessTokenConverter jwtTokenEnhancer() {

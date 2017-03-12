@@ -16,27 +16,23 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
 /**
- * Created by on 28.01.16.
- *
- * @author David Steiman
+ * Created by on 2017.03.08.
  */
 @Configuration
 @EnableAuthorizationServer
 public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory()
-                .withClient("web_app")
-//                .scopes("FOO")
-                .scopes("email")
-                .autoApprove(true)
-//                .authorities("FOO_READ", "FOO_WRITE")
-                .authorizedGrantTypes("implicit","refresh_token", "password", "authorization_code");
+        clients.inMemory().withClient("web_app")
+                .scopes("FOO").autoApprove(true)
+                .authorities("FOO_READ", "FOO_WRITE")
+                .authorizedGrantTypes("implicit", "refresh_token", "password", "authorization_code");
     }
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.tokenStore(tokenStore()).tokenEnhancer(jwtTokenEnhancer()).authenticationManager(authenticationManager);
+        endpoints.tokenStore(tokenStore()).tokenEnhancer(jwtTokenEnhancer())
+                .authenticationManager(authenticationManager);
     }
 
     @Autowired
@@ -48,13 +44,14 @@ public class OAuth2Configuration extends AuthorizationServerConfigurerAdapter {
         return new JwtTokenStore(jwtTokenEnhancer());
     }
 
-//    @Bean
-//    protected JwtAccessTokenConverter jwtTokenEnhancer() {
-//        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("jwt.jks"), "mySecretKey".toCharArray());
-//        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-//        converter.setKeyPair(keyStoreKeyFactory.getKeyPair("jwt"));
-//        return converter;
-//    }
+    //    @Bean
+    //    protected JwtAccessTokenConverter jwtTokenEnhancer() {
+    //    KeyStoreKeyFactory keyStoreKeyFactory =
+    //            new KeyStoreKeyFactory(new ClassPathResource("jwt.jks"), "mySecretKey".toCharArray());
+    //        JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
+    //        converter.setKeyPair(keyStoreKeyFactory.getKeyPair("jwt"));
+    //        return converter;
+    //    }
 
     @Bean
     protected JwtAccessTokenConverter jwtTokenEnhancer() {

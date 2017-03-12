@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.UUID;
 
 /**
- * Created by on 01.02.16.
- *
- * @author David Steiman
+ * Created by on 2017.03.08.
  */
 @RestController
 @RequestMapping("/foo")

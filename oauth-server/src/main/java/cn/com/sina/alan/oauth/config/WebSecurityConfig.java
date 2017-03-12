@@ -10,9 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 /**
- * Created by on 28.01.16.
- *
- * @author David Steiman
+ * Created by on 2017.03.08.
  */
 @Configuration
 class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -21,35 +19,23 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     @Bean
-    public AuthenticationManager    authenticationManagerBean() throws Exception {
+    public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http
-//            .csrf().disable()
-//                .exceptionHandling()
-//                .authenticationEntryPoint((request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
-//            .and()
-//                .authorizeRequests()
-//                .antMatchers("/**").authenticated()
-//            .and()
-//                .httpBasic();
+        //        http.csrf().disable().exceptionHandling().authenticationEntryPoint(
+        //                (request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED)).and()
+        //                .authorizeRequests().antMatchers("/**").authenticated().and().httpBasic();
         super.configure(http);
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("reader")
-                .password("reader")
-                .authorities("FOO_READ")
-                .and()
-                .withUser("writer")
-                .password("writer")
-                .authorities("FOO_READ", "FOO_WRITE");
+        auth.inMemoryAuthentication().withUser("reader").password("reader").authorities("FOO_READ").and()
+                .withUser("writer").password("writer").authorities("FOO_READ", "FOO_WRITE");
 
-//        auth.jdbcAuthentication();
+        //        auth.jdbcAuthentication();
     }
 }

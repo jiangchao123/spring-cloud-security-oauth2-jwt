@@ -1,0 +1,10 @@
+*.iml
+target
+*.idea
+*.DS_Store
+.idea/
+target/
+target/*
+.idea/*
+.idea/*.xml
+.idea/workspace.xml
